@@ -20,3 +20,6 @@ build
 $ coverit build create
 
 
+## Contribution
+
+$ docker-compose up

@@ -1,0 +1,7 @@
+app:
+    image: golang:1.4
+    volumes:
+      - .:/usr/src/myapp
+      - godeps:/go
+    working_dir: /usr/src/myapp
+    command: ./build.sh
