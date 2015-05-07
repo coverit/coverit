@@ -1,0 +1,64 @@
+#%RAML 0.8
+---
+title: Coverit
+version: 0.0.1
+baseUri: http://api.coverit.io/
+mediaType:  application/json
+securedBy: [oauth_2_0]
+
+documentation:
+    - title: Objects
+      content: !include docs/objects.md
+
+securitySchemes:
+    - X-CoveritToken:
+        description: |
+            Dropbox supports OAuth 2.0 for authenticating all API requests.
+        type: OAuth 2.0
+        describedBy:
+            headers:
+                Authorization:
+                    description: |
+                       Used to send a valid OAuth 2 access token. Do not use
+                       with the "access_token" query string parameter.
+                    type: string
+            queryParameters:
+                access_token:
+                    description: |
+                       Used to send a valid OAuth 2 access token. Do not use together with
+                       the "Authorization" header
+                    type: string
+            responses:
+                401:
+                    description: |
+                        Bad or expired token. This can happen if the user or Dropbox
+                        revoked or expired an access token. To fix, you should re-
+                        authenticate the user.
+                403:
+                    description: |
+                        Bad OAuth request (wrong consumer key, bad nonce, expired
+                        timestamp...). Unfortunately, re-authenticating the user won't help here.
+
+/builds:
+    displayName: Build
+    post:
+        description: |
+            Create a new build
+        securedBy: []
+        body:
+            application/x-www-form-urlencoded:
+                formParameters:
+                    project_name:
+                        description: Project name
+                        type: string
+                        required: true
+                        example: AFNetworking/AFNetworking
+                    gcno:
+                        description: gcno files archive
+                        type: file
+                        required: true
+                    commit_sha:
+                        description: Git commit SHA
+                        type: string
+                        required: true
+                        example: AFNetworking/AFNetworking
