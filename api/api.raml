@@ -8,43 +8,16 @@ securedBy: [oauth_2_0]
 
 documentation:
     - title: Objects
-      content: !include docs/objects.md
+      content: !include README.md
 
 securitySchemes:
-    - X-CoveritToken:
-        description: |
-            Dropbox supports OAuth 2.0 for authenticating all API requests.
-        type: OAuth 2.0
-        describedBy:
-            headers:
-                Authorization:
-                    description: |
-                       Used to send a valid OAuth 2 access token. Do not use
-                       with the "access_token" query string parameter.
-                    type: string
-            queryParameters:
-                access_token:
-                    description: |
-                       Used to send a valid OAuth 2 access token. Do not use together with
-                       the "Authorization" header
-                    type: string
-            responses:
-                401:
-                    description: |
-                        Bad or expired token. This can happen if the user or Dropbox
-                        revoked or expired an access token. To fix, you should re-
-                        authenticate the user.
-                403:
-                    description: |
-                        Bad OAuth request (wrong consumer key, bad nonce, expired
-                        timestamp...). Unfortunately, re-authenticating the user won't help here.
+    - oauth_2_0: !include http://raml.link/securitySchemes/oauth_2_0.yml
 
 /builds:
     displayName: Build
     post:
         description: |
             Create a new build
-        securedBy: []
         body:
             application/x-www-form-urlencoded:
                 formParameters:
@@ -52,7 +25,7 @@ securitySchemes:
                         description: Project name
                         type: string
                         required: true
-                        example: AFNetworking/AFNetworking
+                        example: /AFNetworking
                     gcno:
                         description: gcno files archive
                         type: file
@@ -61,4 +34,9 @@ securitySchemes:
                         description: Git commit SHA
                         type: string
                         required: true
-                        example: AFNetworking/AFNetworking
+                        example: 0db872a7825b5860109710911cbe9e23133f39df
+                    branch:
+                        description: Git branch
+                        type: string
+                        required: true
+                        example: master
