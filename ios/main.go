@@ -17,7 +17,6 @@ func NewBuildCommand() cli.Command {
 		Usage: "create a build",
 		Action: func(c *cli.Context) {
 			fmt.Println("hi")
-			collectGcno()
 		},
 	}
 }

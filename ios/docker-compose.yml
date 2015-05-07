@@ -3,6 +3,6 @@ app:
     volumes:
       - .:/usr/src/myapp
       - godeps:/go
-      - xcode:/build
+      - fixtures:/fixtures
     working_dir: /usr/src/myapp
     command: ./build.sh
