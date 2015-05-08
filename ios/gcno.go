@@ -1,12 +1,23 @@
 package main
 
 import (
-	// "archive/zip"
 	"fmt"
+	"github.com/jhoonb/archivex"
 	"os"
 	"path/filepath"
 	"strings"
 )
+
+func ZipGcnos(filename string, files []string) error {
+	zip := new(archivex.ZipFile)
+	zip.Create(filename)
+	for _, f := range files {
+		zip.AddFile(f)
+	}
+	zip.Close()
+
+	return nil
+}
 
 func CollectGcno(root string) ([]string, error) {
 
