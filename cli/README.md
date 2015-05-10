@@ -48,10 +48,10 @@ Finally we need create coverage report with `coverit` such as:
 ```
 after_success:
   -coverit build  # upload gcno
-  -coverit report # upload gcda, and server will analysis the coverage
 
   # Or use this command to analysis of the coverage locally
-  -coverit build-rep # gcno + gcda -> gcov and upload it
+  -coverit report # upload lcov
+
 ```
 
 
