@@ -1,33 +1,32 @@
 package main
 
 import (
-  "fmt"
+	"fmt"
 
-  "github.com/codegangsta/martini"
-  "github.com/codegangsta/martini-contrib/render"
-  "github.com/tmilewski/goenv"
+	"github.com/go-martini/martini"
+	"github.com/martini-contrib/render"
+	"github.com/tmilewski/goenv"
 
-  "./rest"
+	"./rest"
 )
 
 func init() {
-    err := goenv.Load()
+	err := goenv.Load()
 
-    if err != nil {
-        fmt.Println(err)
-    }
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
-
 func main() {
-  m := martini.Classic()
-  m.Use(render.Renderer(render.Options {
-    // nothing here to configure
-  }))
-  // use the Mongo middleware
-  m.Use(rest.DB())
+	m := martini.Classic()
+	m.Use(render.Renderer(render.Options{
+	// nothing here to configure
+	}))
+	// use the Mongo middleware
+	m.Use(rest.DB())
 
-  rest.Include(m)
+	rest.Include(m)
 
-  m.Run()
+	m.Run()
 }
