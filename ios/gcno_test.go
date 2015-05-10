@@ -36,7 +36,7 @@ func TestZip(t *testing.T) {
 			"/fixtures/project_root/1.gcno",
 		}
 
-		err := ZipGcnos(zipfile, files)
+		err := Zip(zipfile, files)
 
 		Convey("The value should be 3 gcno files", func() {
 			So(err, ShouldBeNil)
