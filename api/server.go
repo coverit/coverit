@@ -1,15 +1,25 @@
 package main
 
 import (
-  "net/http"
+  "fmt"
+
   "github.com/codegangsta/martini"
   "github.com/codegangsta/martini-contrib/render"
+  "github.com/tmilewski/goenv"
 
   "./rest"
 )
 
-func main() {
+func init() {
+    err := goenv.Load()
 
+    if err != nil {
+        fmt.Println(err)
+    }
+}
+
+
+func main() {
   m := martini.Classic()
   m.Use(render.Renderer(render.Options {
     // nothing here to configure
@@ -19,6 +29,5 @@ func main() {
 
   rest.Include(m)
 
-  http.ListenAndServe(":8080", m)
-
+  m.Run()
 }
