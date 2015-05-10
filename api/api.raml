@@ -25,9 +25,37 @@ securitySchemes:
                         description: Project name
                         type: string
                         required: true
-                        example: /AFNetworking
+                        example: AFNetworking/AFNetworking
                     gcno:
                         description: gcno files archive
+                        type: file
+                        required: true
+                    commit_sha:
+                        description: Git commit SHA
+                        type: string
+                        required: true
+                        example: 0db872a7825b5860109710911cbe9e23133f39df
+                    branch:
+                        description: Git branch
+                        type: string
+                        required: true
+                        example: master
+
+/reports:
+    displayName: Report
+    post:
+        description: |
+            Create a new report
+        body:
+            application/x-www-form-urlencoded:
+                formParameters:
+                    project_name:
+                        description: Project name
+                        type: string
+                        required: true
+                        example: AFNetworking/AFNetworking
+                    lcov:
+                        description: lcov files archive
                         type: file
                         required: true
                     commit_sha:
