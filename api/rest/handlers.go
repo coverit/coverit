@@ -1,9 +1,9 @@
 package rest
 
 import (
-  "os"
-  "github.com/codegangsta/martini"
-  "labix.org/v2/mgo"
+	"github.com/go-martini/martini"
+	"gopkg.in/mgo.v2"
+	"os"
 )
 
 /*
@@ -13,15 +13,15 @@ import (
    is injected into each handler function.
 */
 func DB() martini.Handler {
-  session, err := mgo.Dial(os.Getenv("MONGO_URL")) // mongodb://localhost
-  if err != nil {
-    panic(err)
-  }
+	session, err := mgo.Dial(os.Getenv("MONGO_URL")) // mongodb://localhost
+	if err != nil {
+		panic(err)
+	}
 
-  return func(c martini.Context) {
-    s := session.Clone()
-    c.Map(s.DB(os.Getenv("MONGO_DB"))) // coverit
-    defer s.Close()
-    c.Next()
-  }
+	return func(c martini.Context) {
+		s := session.Clone()
+		c.Map(s.DB(os.Getenv("MONGO_DB"))) // coverit
+		defer s.Close()
+		c.Next()
+	}
 }
