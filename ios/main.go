@@ -1,25 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"github.com/codegangsta/cli"
 	"os"
+
+	"github.com/codegangsta/cli"
 )
 
 var (
 	version = "0.0.0"
 )
-
-func NewBuildCommand() cli.Command {
-
-	return cli.Command{
-		Name:  "build",
-		Usage: "create a build",
-		Action: func(c *cli.Context) {
-			fmt.Println("hi")
-		},
-	}
-}
 
 func main() {
 	app := cli.NewApp()
