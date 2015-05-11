@@ -15,8 +15,19 @@ func NewReportCommand() cli.Command {
 		Usage: "create a report of code coverage",
 		Action: func(c *cli.Context) {
 
-      fmt.Println("Hi new report")
-    },
+			branchName := GetBranchName()
+			commitSha := GetCommitSha()
+			repoName := GetRepoName()
+
+			createReport(branchName, repoName, commitSha)
+	  },
   }
 
+}
+
+func createReport(branch string, repo string, commit string) error {
+
+	fmt.Println("report " + repo + " on " + branch + " with commit " + commit)
+
+	return nil
 }
