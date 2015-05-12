@@ -1,21 +1,13 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
-	"github.com/tmilewski/goenv"
 
 	"github.com/coverit/coverit/api/rest"
 )
 
 func init() {
-	err := goenv.Load()
-
-	if err != nil {
-		fmt.Println(err)
-	}
 }
 
 func main() {

@@ -7,6 +7,10 @@ Vagrant.configure(2) do |config|
   config.vm.box = "coverit/golang-dev"
   config.vm.box_version = "20150512.0.0"
 
+  config.vm.network :forwarded_port, host: 5801, guest: 3000 # api
+  config.vm.network :forwarded_port, host: 5802, guest: 27017 # mongo
+  config.vm.network :forwarded_port, host: 5803, guest: 5803 # reserved
+
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
   end
