@@ -2,21 +2,23 @@ package main
 
 import (
 	"archive/zip"
-	"fmt"
 	. "github.com/smartystreets/goconvey/convey"
 	"os"
+	"path"
 	"testing"
 )
 
 func TestZip(t *testing.T) {
 
+	pwd, _ := os.Getwd()
+
 	Convey("Given root dir contains 3 gcno files", t, func() {
 
-		zipfile := "/fixtures/src.gcno.zip"
+		zipfile := path.Join(pwd, "/fixtures/src.gcno.zip")
 		files := []string{
-			"/fixtures/project_root/sub/1.gcno",
-			"/fixtures/project_root/sub/2.gcno",
-			"/fixtures/project_root/1.gcno",
+			path.Join(pwd, "/fixtures/project_root/sub/1.gcno"),
+			path.Join(pwd, "/fixtures/project_root/sub/2.gcno"),
+			path.Join(pwd, "/fixtures/project_root/1.gcno"),
 		}
 
 		err := Zip(zipfile, files)
@@ -38,10 +40,9 @@ func TestZip(t *testing.T) {
 				gcnos = append(gcnos, f.Name)
 			}
 
-			fmt.Println("zip contains", gcnos)
-			So(gcnos, ShouldContain, "/fixtures/project_root/sub/1.gcno")
-			So(gcnos, ShouldContain, "/fixtures/project_root/sub/2.gcno")
-			So(gcnos, ShouldContain, "/fixtures/project_root/1.gcno")
+			So(gcnos, ShouldContain, path.Join(pwd, "/fixtures/project_root/sub/1.gcno"))
+			So(gcnos, ShouldContain, path.Join(pwd, "/fixtures/project_root/sub/2.gcno"))
+			So(gcnos, ShouldContain, path.Join(pwd, "/fixtures/project_root/1.gcno"))
 
 		})
 	})
