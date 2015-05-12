@@ -19,6 +19,9 @@ Vagrant.configure(2) do |config|
     # Setup go workspace, see https://golang.org/doc/code.html
     mkdir -p ~/go/src/github.com/coverit
     ln -s /vagrant ~/go/src/github.com/coverit/coverit
+
+    # Dev env for coverit-api
+    GOPATH=~/go go get github.com/codegangsta/gin
   SHELL
 
   config.vm.provision "shell", inline: <<-SHELL
