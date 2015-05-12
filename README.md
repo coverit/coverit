@@ -14,3 +14,4 @@
 Development environment is provided by Vagrant.
 
     vagrant up
+    cd /vagrant
