@@ -7,7 +7,7 @@ Coverit need some parameter to running as below:
 
  - coverit_repo_name
  - coverit_commit_sha
- - cpverit_branch_name
+ - coverit_branch_name
  - coverit_api_token
  > More parameter ...
 
