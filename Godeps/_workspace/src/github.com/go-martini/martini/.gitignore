@@ -21,9 +21,6 @@ _testmain.go
 
 *.exe
 *.test
-*.prof
 
-# Vagrant
-.vagrant
-
-gin-bin
+/.godeps
+/.envrc
