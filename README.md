@@ -2,6 +2,8 @@
 
 > Code Coverage for iOS/Mac
 
+[![CI Status](http://img.shields.io/travis/coverit/coverit/master.svg?style=flat)](https://travis-ci.org/coverit/coverit)
+
 ## Modules
 
 - [web](web), Frontend
