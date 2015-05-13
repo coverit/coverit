@@ -33,6 +33,11 @@ Vagrant.configure(2) do |config|
     echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
     apt-get update
     apt-get install -y mongodb-org
+
+    # Test env for coverit-cli
+    apt-get install -y gcc-4.4
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50 --slave /usr/bin/gcov gcov /usr/bin/gcov-4.8
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 60 --slave /usr/bin/gcov gcov /usr/bin/gcov-4.4
   SHELL
 
 end
