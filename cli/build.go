@@ -18,6 +18,6 @@ func NewBuildCommand() cli.Command {
 			repoName := GetRepoName()
 
 			fmt.Println("build " + repoName + " on " + branchName + " with commit " + commitSha)
-    },
+		},
 	}
 }

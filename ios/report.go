@@ -8,6 +8,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 
 	"github.com/codegangsta/cli"
@@ -37,7 +38,11 @@ func NewReportCommand() cli.Command {
 				log.Fatal("Please specify a correct commit sha")
 			}
 
-			createReport(branch, repo, commit)
+			err := createReport(branch, repo, commit)
+
+			if err != nil {
+				fmt.Println(err)
+			}
 		},
 	}
 
@@ -47,39 +52,44 @@ func createReport(branch string, repo string, commit string) error {
 
 	fmt.Println("reporting " + repo + " on " + branch + " with commit " + commit)
 
-	var lcovPath = "./lcov.zip" //Fixme: get real lcov path
+	pwd, _ := os.Getwd()
 
-	extraParams := map[string]string{
-		"project_name": repo,
-		"commit_sha":   commit,
-		"branch":       branch,
-	}
+	return Lcov(path.Join(pwd), "coverage.info")
+	/*
+		var uploadUrl = "http://google.com/upload"
 
-	request, err := newfileUploadRequest("http://google.com/upload", extraParams, "lcov", lcovPath)
+		extraParams := map[string]string{
+			"project_name": repo,
+			"commit_sha":   commit,
+			"branch":       branch,
+		}
 
-	if err != nil {
-		log.Fatal(err)
-	}
+		request, err := newfileUploadRequest(uploadUrl, extraParams, "lcov", "lcovPath")
 
-	client := &http.Client{}
-	resp, err := client.Do(request)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	if err != nil {
-		log.Fatal(err)
-	}
+		client := &http.Client{}
+		resp, err := client.Do(request)
 
-	body := &bytes.Buffer{}
-	_, err = body.ReadFrom(resp.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	resp.Body.Close()
-	fmt.Println(resp.StatusCode)
-	fmt.Println(resp.Header)
-	fmt.Println(body)
+		body := &bytes.Buffer{}
+		_, err = body.ReadFrom(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	return nil
+		resp.Body.Close()
+		fmt.Println(resp.StatusCode)
+		fmt.Println(resp.Header)
+		fmt.Println(body)
+
+		return nil
+	*/
 }
 
 func newfileUploadRequest(uri string, params map[string]string, paramName, path string) (*http.Request, error) {

@@ -1,69 +1,68 @@
 package main
 
 import (
+	"io/ioutil"
 	"os"
-  "io/ioutil"
 
-  "gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 )
 
 type CovYml struct {
-  Repo   string `yaml:"coverit_repo_name"`;
-  Commit string `yaml:"coverit_commit_sha"`;
-  Branch string `yaml:"coverit_branch_name"`;
-  Token  string `yaml:"coverit_api_token"`;
+	Repo   string `yaml:"coverit_repo_name"`
+	Commit string `yaml:"coverit_commit_sha"`
+	Branch string `yaml:"coverit_branch_name"`
+	Token  string `yaml:"coverit_api_token"`
 }
-
 
 func GetBranchName() string {
 
-  branchName := os.Getenv("coverit_branch_name")
+	branchName := os.Getenv("coverit_branch_name")
 
-  if branchName != "" {
+	if branchName != "" {
 		return branchName
-  }
+	}
 
-  cov, _ := coveritYml()
+	cov, _ := coveritYml()
 
-  return cov.Branch
+	return cov.Branch
 }
 
 func GetCommitSha() string {
-  commitSha := os.Getenv("coverit_commit_sha")
+	commitSha := os.Getenv("coverit_commit_sha")
 
-  if commitSha != "" {
-    return commitSha
-  }
+	if commitSha != "" {
+		return commitSha
+	}
 
-  cov, _ := coveritYml()
+	cov, _ := coveritYml()
 
-  return cov.Commit
+	return cov.Commit
 }
 
 func GetRepoName() string {
-  repoName := os.Getenv("coverit_repo_name")
+	repoName := os.Getenv("coverit_repo_name")
 
-  if repoName != "" {
-    return repoName
-  }
+	if repoName != "" {
+		return repoName
+	}
 
-  cov, _ := coveritYml()
+	cov, _ := coveritYml()
 
-  return cov.Repo
+	return cov.Repo
 }
 
 func coveritYml() (CovYml, error) {
 
-  cov := CovYml{}
-  fileName := ".coverit.yml"
+	cov := CovYml{}
+	fileName := ".coverit.yml"
 
-  source, err := ioutil.ReadFile(fileName)
+	source, err := ioutil.ReadFile(fileName)
 
-  if err != nil {
-    return cov, err
-  }
+	if err != nil {
+		return cov, err
+	}
 
-  yaml.Unmarshal(source, &cov)
+	yaml.Unmarshal(source, &cov)
 
-  return cov, nil
+	return cov, nil
 }

@@ -38,7 +38,7 @@ And than you need to export some important configuration before using coverit, s
 
 ```
 after_success:
-  -export COVERIT_BARNCH_NAME = $TRAVIS_BRANCH
+  -export coverit_branch_name = $TRAVIS_BRANCH
   -export coverit_commit_sha  = $TRAVIS_COMMIT
   -export coverit_repo_name   = "AFNetowrking"
 ```
