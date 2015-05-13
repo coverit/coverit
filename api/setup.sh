@@ -1,3 +1,6 @@
 #!/bin/bash
 
-go run server.go
+export MONGO_URL='mongodb://localhost'
+export MONGO_DB='juliet'
+
+go run *.go
