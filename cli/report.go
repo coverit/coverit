@@ -8,7 +8,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
-	"path"
+	// "path"
 	"path/filepath"
 
 	"github.com/codegangsta/cli"
@@ -20,6 +20,19 @@ func NewReportCommand() cli.Command {
 
 		Name:  "report",
 		Usage: "create a report of code coverage",
+		Flags: []cli.Flag{
+
+			cli.StringFlag{
+				Name:  "d",
+				Value: "./",
+				Usage: "identify DerivedData path for search gcda, gcno files",
+			},
+			cli.StringFlag{
+				Name:  "o",
+				Value: "coverage.info",
+				Usage: "output path for coverage info file",
+			},
+		},
 		Action: func(c *cli.Context) {
 
 			branch := GetBranchName()
@@ -38,24 +51,27 @@ func NewReportCommand() cli.Command {
 				log.Fatal("Please specify a correct commit sha")
 			}
 
-			err := createReport(branch, repo, commit)
+			err := createReport(branch, repo, commit, c)
 
 			if err != nil {
-				fmt.Println(err)
+				log.Fatal(err)
 			}
 		},
 	}
-
 }
 
-func createReport(branch string, repo string, commit string) error {
+func createReport(branch string, repo string, commit string, c *cli.Context) error {
 
-	fmt.Println("reporting " + repo + " on " + branch + " with commit " + commit)
+	var derivedPath = c.String("d")
+	var outputPath = c.String("o")
 
-	pwd, _ := os.Getwd()
+	fmt.Println("Searching gcda, gcno in: " + derivedPath)
+	fmt.Println("Generate coverage info file: " + outputPath)
 
-	return Lcov(path.Join(pwd), "coverage.info")
+	return Lcov(derivedPath, outputPath)
 	/*
+		fmt.Println("reporting " + repo + " on " + branch + " with commit " + commit)
+
 		var uploadUrl = "http://google.com/upload"
 
 		extraParams := map[string]string{
