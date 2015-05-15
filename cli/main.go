@@ -18,6 +18,7 @@ func main() {
 
 	app.Commands = []cli.Command{
 		NewBuildCommand(),
+		NewReportCommand(),
 	}
 	app.Run(os.Args)
 }

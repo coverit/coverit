@@ -5,10 +5,10 @@
 ## Usage
 Coverit need some parameter to running as below:
 
- - COVERIT_REPO_NAME
- - COVERIT_COMMIT_SHA
- - COVERIT_BRANCH_NAME
- - COVERIT_API_TOKEN
+ - coverit_repo_name
+ - coverit_commit_sha
+ - coverit_branch_name
+ - coverit_api_token
  > More parameter ...
 
 ```
@@ -38,9 +38,9 @@ And than you need to export some important configuration before using coverit, s
 
 ```
 after_success:
-  -export COVERIT_BARNCH_NAME = $TRAVIS_BRANCH
-  -export COVERIT_COMMIT_SHA  = $TRAVIS_COMMIT
-  -export COVERIT_REPO_NAME   = "AFNetowrking"
+  -export coverit_branch_name = $TRAVIS_BRANCH
+  -export coverit_commit_sha  = $TRAVIS_COMMIT
+  -export coverit_repo_name   = "AFNetowrking"
 ```
 > You can also set these parameters into .coverit.yml. But we'll preferred to read the environment variables.
 
@@ -48,10 +48,10 @@ Finally we need create coverage report with `coverit` such as:
 ```
 after_success:
   -coverit build  # upload gcno
-  -coverit report # upload gcda, and server will analysis the coverage
 
   # Or use this command to analysis of the coverage locally
-  -coverit build-rep # gcno + gcda -> gcov and upload it
+  -coverit report # upload lcov
+
 ```
 
 
