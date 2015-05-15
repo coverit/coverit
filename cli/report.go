@@ -40,15 +40,15 @@ func NewReportCommand() cli.Command {
 			repo := GetRepoName()
 
 			if branch == "" {
-				log.Fatal("Please specify a correct branch name")
+				// log.Fatal("Please specify a correct branch name")
 			}
 
 			if repo == "" {
-				log.Fatal("Please specify a correct repo name")
+				// log.Fatal("Please specify a correct repo name")
 			}
 
 			if commit == "" {
-				log.Fatal("Please specify a correct commit sha")
+				// log.Fatal("Please specify a correct commit sha")
 			}
 
 			err := createReport(branch, repo, commit, c)
