@@ -25,5 +25,7 @@ _testmain.go
 
 # Vagrant
 .vagrant
+script/custom-vagrant
 
 gin-bin
+
