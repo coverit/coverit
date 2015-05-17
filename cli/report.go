@@ -8,10 +8,10 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
-	// "path"
 	"path/filepath"
 
 	"github.com/codegangsta/cli"
+	"github.com/mitchellh/go-homedir"
 )
 
 func NewReportCommand() cli.Command {
@@ -24,8 +24,8 @@ func NewReportCommand() cli.Command {
 
 			cli.StringFlag{
 				Name:  "d",
-				Value: "./",
-				Usage: "identify DerivedData path for search gcda, gcno files",
+				Value: "",
+				Usage: "identify DerivedData path for search gcda, gcno files, default value is '~/Library/Developer/Xcode/DerivedData'",
 			},
 			cli.StringFlag{
 				Name:  "o",
@@ -64,6 +64,12 @@ func createReport(branch string, repo string, commit string, c *cli.Context) err
 
 	var derivedPath = c.String("d")
 	var outputPath = c.String("o")
+
+	if derivedPath == "" {
+		home, _ := homedir.Dir()
+		derivedPath = filepath.Join(home, "Library/Developer/Xcode/DerivedData")
+		fmt.Println("Using the default derived path: " + derivedPath)
+	}
 
 	fmt.Println("Searching gcda, gcno in: " + derivedPath)
 	fmt.Println("Generate coverage info file: " + outputPath)
