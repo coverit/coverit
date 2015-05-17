@@ -3,8 +3,6 @@ package main
 import (
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
-
-	"github.com/coverit/coverit/api/rest"
 )
 
 func init() {
@@ -16,9 +14,9 @@ func main() {
 	// nothing here to configure
 	}))
 	// use the Mongo middleware
-	m.Use(rest.DB())
+	m.Use(DB())
 
-	rest.Include(m)
+	Include(m)
 
 	m.Run()
 }

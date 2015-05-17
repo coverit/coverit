@@ -1,4 +1,4 @@
-package models
+package main
 
 import (
 	"gopkg.in/mgo.v2"
@@ -14,18 +14,18 @@ type Build struct {
 	Gcno        string        `form:"gcno" json:"gcno" bson:"gcno"`
 }
 
-func AllBuilds(db *mgo.Database) []Build {
-	var builds []Build
-	db.C("builds").Find(nil).All(&builds)
-	return builds
+func AllBuilds(db *mgo.Database) (builds []Build, err error) {
+	err = db.C("builds").Find(nil).All(&builds)
+	return builds, err
 }
 
-func FetchBuild(db *mgo.Database, build_id string) Build {
-	var build Build
-	db.C("builds").Find(bson.M{"_id": build_id}).One(&build)
-	return build
+func FetchBuild(db *mgo.Database, buildId string) (build Build, err error) {
+	err = db.C("builds").Find(bson.M{"_id": bson.ObjectIdHex(buildId)}).One(&build)
+	return build, err
 }
 
-func InsertBuild(db *mgo.Database, build Build) {
-	db.C("builds").Insert(build)
+func InsertBuild(db *mgo.Database, build Build) (buildId bson.ObjectId, err error) {
+	build.ID = bson.NewObjectId()
+	err = db.C("builds").Insert(build)
+	return build.ID, err
 }
