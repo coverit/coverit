@@ -1,4 +1,4 @@
- GIT_COMMIT=`git rev-parse --short HEAD`
+GIT_COMMIT=`git rev-parse --short HEAD`
 GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 GIT_TAG=`git describe --tags --exact-match --match "v*" 2>/dev/null || echo "none"`
 GIT_DIRTY=`test -n "$(git status --porcelain)" && echo true || echo false`
@@ -18,4 +18,8 @@ test-unit:
 test-integration:
 	@echo TODO: Integration testing is not implement yet
 
+deps:
+	godep restore
+	PWD=~/go/src/github.com/coverit/coverit go get -t ./...
+	PWD=~/go/src/github.com/coverit/coverit godep save ./...
 .PHONY: all clean test test-unit test-integration
