@@ -21,6 +21,10 @@
 			"Rev": "d39885924ac22dcafaa9fd452a3af1261107799d"
 		},
 		{
+			"ImportPath": "github.com/jhoonb/archivex",
+			"Rev": "1782899c99c521f2d20ac97cb298ee07aba3f995"
+		},
+		{
 			"ImportPath": "github.com/jtolds/gls",
 			"Rev": "9a4a02dbe491bef4bab3c24fd9f3087d6c4c6690"
 		},
@@ -45,11 +49,6 @@
 			"ImportPath": "github.com/smartystreets/goconvey/convey",
 			"Comment": "1.5.0-390-g7a3785c",
 			"Rev": "7a3785c3002a330211525464d402c07b2afce5a7"
-		},
-		{
-			"ImportPath": "github.com/tmilewski/goenv",
-			"Comment": "v1.0.0",
-			"Rev": "c7da341302c5a0c97a2ac2c2cce8d4bdc827ca16"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2",
