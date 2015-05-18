@@ -37,6 +37,10 @@
 			"Rev": "b65063311fac6cbf84d3538f5715f7847e648322"
 		},
 		{
+			"ImportPath": "github.com/mitchellh/go-homedir",
+			"Rev": "1f6da4a72e57d4e7edd4a7295a585e0a3999a2d4"
+		},
+		{
 			"ImportPath": "github.com/oxtoacart/bpool",
 			"Rev": "754d38fccfc6e52083355014b6abc8d626445dfd"
 		},
