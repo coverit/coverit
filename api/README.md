@@ -52,11 +52,11 @@ dir1:
     - `SDK`, testing SDK, i.e. iOS 8.3, Android 5.2
 - `GcdaArchive`, zip of all gcda files of current test
 - `CoverageTree`, coverage info tree
-    - `stats`, file level coverage info
+    - `files`, file level coverage info
     - `functions`, function level coverage info
     - `lines`, line level coverage info
 ```yaml
-stats:
+files:
     - source: "file1"
       lines": 10
       lines_hit: 11
