@@ -3,3 +3,11 @@ dev:
     volumes:
       - .:/go/src/github.com/coverit/coverit
     working_dir: /go/src/github.com/coverit/coverit
+    environment:
+        - DEBUG=1
+        - DB_NAME=test
+    links:
+        - mongodb:mongo
+
+mongodb:
+    image: mongo:3.0.3

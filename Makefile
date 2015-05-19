@@ -6,7 +6,8 @@ GIT_DIRTY=`test -n "$(git status --porcelain)" && echo true || echo false`
 all: test
 
 dev:
-	cd /vagrant/api; gin -g -a 3000 -p 5803
+	@docker-compose run dev make test
+	# cd /vagrant/api; gin -g -a 3000 -p 5803
 clean:
 	git clean -Xdf -e '!.vagrant' -e '!script/custom-vagrant'
 
