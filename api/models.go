@@ -14,6 +14,46 @@ type Build struct {
 	Gcno        string        `form:"gcno" json:"gcno" bson:"gcno"`
 }
 
+type Runtime struct {
+	Platform string
+	Device   string
+	SDK      string
+}
+
+type CoverageFileStat struct {
+	Source        string
+	lines         int
+	lines_hit     int
+	functions     int
+	functions_hit int
+}
+
+type CoverageFunctionStat struct {
+	Source  string
+	name    string
+	line_no int
+	hit     int
+}
+
+type CoverageLineStat struct {
+	Source  string
+	line_no int
+	hit     int
+}
+
+type CoverageTree struct {
+	Files    []CoverageFileStat     `bson:,"inline"`
+	Funtions []CoverageFunctionStat `bson:,"inline"`
+	Lines    []CoverageLineStat     `bson:,"inline"`
+}
+
+type Report struct {
+	Id          bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	BuildId     bson.ObjectId
+	RunAt       Runtime `bson:,"inline"`
+	GcdaArchive string
+}
+
 func AllBuilds(db *mgo.Database) (builds []Build, err error) {
 	err = db.C("builds").Find(nil).All(&builds)
 	return builds, err
