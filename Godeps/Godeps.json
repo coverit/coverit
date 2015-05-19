@@ -29,6 +29,10 @@
 			"Rev": "9a4a02dbe491bef4bab3c24fd9f3087d6c4c6690"
 		},
 		{
+			"ImportPath": "github.com/libgit2/git2go",
+			"Rev": "193deb7ae3cbc5d5a1f7f186aae6edb20bff950a"
+		},
+		{
 			"ImportPath": "github.com/martini-contrib/binding",
 			"Rev": "8aaceec3b52c275477f32c95ea5c6e8ccaba04c5"
 		},
