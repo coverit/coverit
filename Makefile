@@ -6,7 +6,7 @@ GIT_DIRTY=`test -n "$(git status --porcelain)" && echo true || echo false`
 all: test
 
 dev:
-	gin -g -t api/ -a 3000 -p 5803 run server.go
+	cd /vagrant/api; gin -g -a 3000 -p 5803
 clean:
 	git clean -Xdf -e '!.vagrant' -e '!script/custom-vagrant'
 
