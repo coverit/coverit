@@ -2,12 +2,16 @@ package main
 
 import (
 	. "github.com/smartystreets/goconvey/convey"
+	"os"
 	"testing"
 )
 
 func TestBranch(t *testing.T) {
 
 	Convey("Enter fixtures testing repo", t, func() {
+
+		Unzip("./fixtures/git_read_test.zip", "./fixtures/")
+		defer os.RemoveAll("./fixtures/git_read_test")
 
 		repo, _ := OpenRepo("./fixtures/git_read_test")
 
@@ -24,6 +28,9 @@ func TestCommitSha(t *testing.T) {
 
 	Convey("Enter fixtures testing repo", t, func() {
 
+		Unzip("./fixtures/git_read_test.zip", "./fixtures/")
+		defer os.RemoveAll("./fixtures/git_read_test")
+
 		repo, _ := OpenRepo("./fixtures/git_read_test")
 
 		Convey("The head commit sha should be '0bb5b4d2ad6ea3480f4ecfafe83f521ba880c729'", func() {
@@ -38,6 +45,9 @@ func TestCommitSha(t *testing.T) {
 func TestAuthor(t *testing.T) {
 
 	Convey("Enter fixtures testing repo", t, func() {
+
+		Unzip("./fixtures/git_read_test.zip", "./fixtures/")
+		defer os.RemoveAll("./fixtures/git_read_test")
 
 		repo, _ := OpenRepo("./fixtures/git_read_test")
 		author, _ := repo.Author()
@@ -59,6 +69,9 @@ func TestCommitter(t *testing.T) {
 
 	Convey("Enter fixtures testing repo", t, func() {
 
+		Unzip("./fixtures/git_read_test.zip", "./fixtures/")
+		defer os.RemoveAll("./fixtures/git_read_test")
+
 		repo, _ := OpenRepo("./fixtures/git_read_test")
 		committer, _ := repo.Committer()
 
@@ -78,6 +91,9 @@ func TestCommitter(t *testing.T) {
 func TestCommitMessage(t *testing.T) {
 
 	Convey("Enter fixtures testing repo", t, func() {
+
+		Unzip("./fixtures/git_read_test.zip", "./fixtures/")
+		defer os.RemoveAll("./fixtures/git_read_test")
 
 		repo, _ := OpenRepo("./fixtures/git_read_test")
 
