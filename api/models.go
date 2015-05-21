@@ -20,38 +20,39 @@ type Runtime struct {
 	SDK      string
 }
 
-type CoverageFileStat struct {
-	Source        string
-	lines         int
-	lines_hit     int
-	functions     int
-	functions_hit int
+type CoverageStat struct {
+	Source       string
+	Lines        int
+	LinesHit     int
+	Functions    int
+	FunctionsHit int
 }
 
-type CoverageFunctionStat struct {
-	Source  string
-	name    string
-	line_no int
-	hit     int
+type CoverageFunction struct {
+	Source string
+	Name   string
+	LineNo int
+	Hit    int
 }
 
-type CoverageLineStat struct {
-	Source  string
-	line_no int
-	hit     int
+type CoverageLine struct {
+	Source string
+	LineNo int
+	Hit    int
 }
 
 type CoverageTree struct {
-	Files    []CoverageFileStat     `bson:,"inline"`
-	Funtions []CoverageFunctionStat `bson:,"inline"`
-	Lines    []CoverageLineStat     `bson:,"inline"`
+	Stats     []CoverageStat     `bson:,"inline"`
+	Functions []CoverageFunction `bson:,"inline"`
+	Lines     []CoverageLine     `bson:,"inline"`
 }
 
 type Report struct {
 	Id          bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	BuildId     bson.ObjectId
-	RunAt       Runtime `bson:,"inline"`
+	BuildId     bson.ObjectId `bson:",omitempty"`
+	RunAt       Runtime       `bson:",inline"`
 	GcdaArchive string
+	Coverage    CoverageTree
 }
 
 func AllBuilds(db *mgo.Database) (builds []Build, err error) {
