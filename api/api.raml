@@ -13,6 +13,33 @@ documentation:
 securitySchemes:
     - oauth_2_0: !include http://raml.link/securitySchemes/oauth_2_0.yml
 
+/upload:
+    displayName: Upload coverage report
+    post:
+        description: |
+            Upload coverage report
+        body:
+            application/x-www-form-urlencoded:
+                formParameters:
+                    token:
+                        description: Repo Token
+                        type: string
+                        required: true
+                        example: AFNetworking/AFNetworking
+                    report:
+                        description: Report file, it's type should carried in `Content-Type`
+                        type: file
+                    git_commit:
+                        description: Git commit sha in 10 chars
+                        type: string
+                        required: true
+                        example: 09b26bf784
+                    git_branch:
+                        description: Git branch
+                        type: string
+                        required: true
+                        example: master
+
 /builds:
     displayName: Build
     post:
