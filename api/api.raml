@@ -42,78 +42,80 @@ securitySchemes:
 
 /builds:
     displayName: Build
-    post:
-        description: |
-            Create a new build
-        body:
-            application/x-www-form-urlencoded:
-                formParameters:
-                    project_name:
-                        description: Project name
-                        type: string
-                        required: true
-                        example: AFNetworking/AFNetworking
-                    gcno:
-                        description: gcno files archive
-                        type: file
-                        required: true
-                    git:
-                        description: A hash of Git data that can be used to display more information to users.
-                        type: string
-                        example: '
-                            "git": {
-                              "head": {
-                                "id": "b31f08d07ae564b08237e5a336e478b24ccc4a65",
-                                "author_name": "Nick Merwin",
-                                "author_email": "...",
-                                "committer_name": "Nick Merwin",
-                                "committer_email": "...",
-                                "message": "version bump"
-                              },
-                              "branch": "master",
-                              "remotes": [
-                                {
-                                  "name": "origin",
-                                  "url": "git@github.com:lemurheavy/coveralls-ruby.git"
-                                }
-                              ]
-                            }'
+    /{build_id}:
+        uriParameters:
+            build_id:
+                description: Build ID
+                type: string
+                example: '4ed2b809d7446b9a0e000014'
+        get:
+            description: |
+                Get build info
+            responses:
+                200:
+                    body:
+                        schema: |
+                            _id: string
+                            git:
+                                branch: string
+                                commit: string
+                                date: time
+                                commiter: string
+                                type: string
+                            platform: string
+                            coverage: int
+                            reports: [string]
 
 /reports:
     displayName: Report
-    post:
-        description: |
-            Create a new report
-        body:
-            application/x-www-form-urlencoded:
-                formParameters:
-                    project_name:
-                        description: Project name
-                        type: string
-                        required: true
-                        example: AFNetworking/AFNetworking
-                    lcov:
-                        description: lcov file
-                        type: file
-                        required: true
-                    git:
-                        description: A hash of Git data that can be used to display more information to users.
-                        type: string
-                        example: '
-                            "git": {
-                              "head": {
-                                "id": "b31f08d07ae564b08237e5a336e478b24ccc4a65",
-                                "author_name": "Nick Merwin",
-                                "author_email": "...",
-                                "committer_name": "Nick Merwin",
-                                "committer_email": "...",
-                                "message": "version bump"
-                              },
-                              "branch": "master",
-                              "remotes": [
-                                {
-                                  "name": "origin",
-                                  "url": "git@github.com:lemurheavy/coveralls-ruby.git"
-                                }
-                              ]
-                            }'
+    /{report_id}:
+        uriParameters:
+            report_id:
+                description: Report ID
+                type: string
+                example: '4ed2b809d7446b9a0e000014'
+        get:
+            description: |
+                Get report
+            responses:
+                200:
+                    body:
+                        schema: |
+                            _id: string
+                            user: string
+                            project: string
+                            build:
+                                git:
+                                    commit: string
+                                    branch: string
+                                    date: time
+                            files: [
+                                name: string
+                                coverage: int
+                                lines: int
+                                hit: int
+                            ]
+
+        /{file_name}:
+            uriParameters:
+                file_name:
+                    description: File name
+                    type: string
+                    example: 'coverit/main.go'
+            get:
+                description: |
+                    Get source level coverage info
+                responses:
+                    200:
+                        body:
+                            schema: |
+                                user: string
+                                project: string
+                                file: string
+                                source: string
+                                line_coverage: [
+                                    line_no: int
+                                    hit: int
+                                ]
+                                coverage: int
+                                lines: int
