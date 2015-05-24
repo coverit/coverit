@@ -1,0 +1,16 @@
+image: daocloud/ci-golang:1.4
+services:
+  - mongodb
+install:
+  - go get github.com/tools/godep
+  - sudo apt-get install -y lcov
+script:
+  - make test
+
+# branches:
+#   only:
+#     - master
+
+notifications:
+  slack:
+    secure: dYbSo9Rvc3rlf+USl6S3Z1tmHDgjbwF9d/HgNur/uzba4tg/YJYOCCoc/dhon2osCc46RD3wz3t96kc5+4oWNfL/K/QysNtmUt6KLj3z47WeNJG+XsNIJSdzkqhYekal40qnmTOfzryLvdChsy8SBt9x61Ci420Xk6SYmySnW1Y=
