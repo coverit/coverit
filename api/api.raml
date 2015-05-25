@@ -40,6 +40,37 @@ securitySchemes:
                         required: true
                         example: master
 
+/users:
+    displayName: User
+    post:
+        description: |
+            Create a user
+        body:
+            schema: |
+                name: string
+                password: string
+                email: email
+        responses:
+            201:
+                body:
+                    schema: |
+                        _id: string
+    /{user_id}:
+        uriParameters:
+            user_id:
+                description: User ID
+                type: string
+                example: '4ed2b809d7446b9a0e000014'
+        get:
+            description: Get user info
+            responses:
+                200:
+                    body:
+                        schema: |
+                            _id: string
+                            name: string
+                            source: string
+
 /projects:
     displayName: Project
     post:
@@ -56,9 +87,14 @@ securitySchemes:
                     schema: |
                         _id: string
                         name: string
+                        repo_url: url
     get:
         description: |
             List projects
+        queryParameters:
+            user_id:
+                description: User id
+                example: coverit
         responses:
             200:
                 body:
@@ -66,6 +102,7 @@ securitySchemes:
                         [
                             _id: string
                             name: string
+                            repo_url: url
                         ]
 
 
@@ -85,18 +122,18 @@ securitySchemes:
             200:
                 body:
                     schema: |
-                    [
-                        _id: string
-                        git:
-                            branch: string
-                            commit: string
-                            date: time
-                            commiter: string
-                            type: string
-                        platform: string
-                        coverage: int
-                        reports: [string]
-                    ]
+                        [
+                            _id: string
+                            git:
+                                branch: string
+                                commit: string
+                                date: time
+                                commiter: string
+                                type: string
+                            platform: string
+                            coverage: int
+                            reports: [string]
+                        ]
     /{build_id}:
         uriParameters:
             build_id:
