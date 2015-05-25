@@ -211,3 +211,15 @@ securitySchemes:
                                 ]
                                 coverage: int
                                 lines: int
+
+/services:
+    displayName: Service
+    /github:
+        description: Github service
+        /create_user:
+            description: Sign up thru Github
+        /projects:
+            get:
+                description: List current user's Github projects
+                responses:
+                    200:
