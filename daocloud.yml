@@ -1,9 +1,6 @@
-image: daocloud/ci-golang:1.4
+image: coverit/golang-dev
 services:
   - mongodb
-install:
-  - go get github.com/tools/godep
-  - sudo apt-get install -y lcov
 script:
   - make test
 
