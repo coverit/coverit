@@ -13,10 +13,8 @@
 
 ## Contribution
 
-Development environment is provided by Vagrant.
-
-    vagrant up
-    cd /vagrant
+    docker run -it -v $PWD:/go/src/github.com/coverit/coverit coverit/golang-dev  /bin/bash
+    cd /go/src/github.com/coverit/coverit
 
 Add dep,
 
