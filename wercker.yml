@@ -1,0 +1,9 @@
+box: coverit/golang-dev
+services:
+    - mongo:3.0.3
+build:
+  steps:
+    - script:
+        name: test
+        code: |
+          make test

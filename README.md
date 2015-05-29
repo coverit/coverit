@@ -2,7 +2,7 @@
 
 > Code Coverage for iOS/Mac
 
-[![CI Status](http://img.shields.io/travis/coverit/coverit/master.svg?style=flat)](https://travis-ci.org/coverit/coverit)
+[![wercker status](https://app.wercker.com/status/ffe09e833162a56b84fd78c1d0231b55/s/master "wercker status")](https://app.wercker.com/project/bykey/ffe09e833162a56b84fd78c1d0231b55)
 
 ## Modules
 
