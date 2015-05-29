@@ -1,0 +1,5 @@
+dev:
+    image: coverit/golang-dev
+    volumes:
+      - .:/go/src/github.com/coverit/coverit
+    working_dir: /go/src/github.com/coverit/coverit
