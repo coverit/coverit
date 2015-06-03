@@ -29,10 +29,6 @@
 			"Rev": "9a4a02dbe491bef4bab3c24fd9f3087d6c4c6690"
 		},
 		{
-			"ImportPath": "github.com/libgit2/git2go",
-			"Rev": "193deb7ae3cbc5d5a1f7f186aae6edb20bff950a"
-		},
-		{
 			"ImportPath": "github.com/martini-contrib/binding",
 			"Rev": "8aaceec3b52c275477f32c95ea5c6e8ccaba04c5"
 		},
@@ -57,6 +53,10 @@
 			"ImportPath": "github.com/smartystreets/goconvey/convey",
 			"Comment": "1.5.0-390-g7a3785c",
 			"Rev": "7a3785c3002a330211525464d402c07b2afce5a7"
+		},
+		{
+			"ImportPath": "gopkg.in/libgit2/git2go.v22",
+			"Rev": "3c3a55cfb85cba204b15d23e9f1ae2db20782e4d"
 		},
 		{
 			"ImportPath": "gopkg.in/mgo.v2",
