@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gopkg.in/libgit2/git2go.v22"
+	"github.com/libgit2/git2go"
 )
 
 type GitRepo struct {
