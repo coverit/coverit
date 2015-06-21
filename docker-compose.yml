@@ -8,6 +8,8 @@ dev:
         - DB_NAME=test
     links:
         - mongodb:mongo
+    ports:
+        - "3000:3000"
 
 mongodb:
     image: mongo:3.0.3

@@ -15,12 +15,21 @@ func main() {
 	// nothing here to configure
 	}))
 
-	session, err := mgo.Dial(os.Getenv("MONGO_URL")) // mongodb://localhost
+	var mongoURL string
+	if len(os.Getenv("MONGO_DB")) != 0 {
+		mongoURL = os.Getenv("MONGO_DB")
+	} else if len(os.Getenv("MONGO_PORT_27017_TCP_ADDR")) != 0 {
+		mongoURL = os.Getenv("MONGO_PORT_27017_TCP_ADDR")
+	} else {
+		mongoURL = "localhost"
+	}
+
+	session, err := mgo.Dial(mongoURL) // mongodb://localhost
 	if err != nil {
 		panic(err)
 	}
 
-	db := session.DB(os.Getenv("MONGO_DB"))
+	db := session.DB(mongoURL)
 
 	buildService := BuildService{
 		Resource: &BuildResource{db: db},
